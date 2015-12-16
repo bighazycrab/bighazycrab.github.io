@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <title>SlickGrid example: Header Grouping</title>
+    <link rel="stylesheet" href="../slick.grid.css" type="text/css" />
+    <link rel="stylesheet" href="../css/smoothness/jquery-ui-1.11.3.custom.css" type="text/css" />
+    <link rel="stylesheet" href="examples.css" type="text/css" />
+</head>
+
+<body>
+    <table width="100%">
+        <tr>
+            <td valign="top" width="50%">
+                <div id="myGrid" style="width: 1000px; height: 500px;"></div>
+            </td>
+            <td valign="top">
+                <h2>Demonstrates:</h2>
+                <ul>
+                    <li>Grid header grouping</li>
+                    <li>Currently supports one-level of grouping.</li>
+                </ul>
+                <h2>Following features to be included in upcoming check-ins:</h2>
+                <ul>
+                    <li>1. Swapping columns with this feature enabled.</li>
+                    <li>2. Extend additional properties as like normal columns for group information.</li>
+                    <li>3. Multi-level grouping.</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <script src="../lib/jquery-1.11.2.js"></script>
+    <script src="../lib/jquery.event.drag-2.2.js"></script>
+    <script src="../slick.core.js"></script>
+    <script src="../slick.grid.js"></script>
+    <script>
+    var grid;
+    var columns = [{
+            id: "title",
+            name: "Title",
+            field: "title",
+            width: 200
+        }, {
+            id: 'common',
+            name: 'Common Factor',
+            columns: [{
+                id: "duration",
+                name: "Duration",
+                field: "duration",
+                width: 200
+            }, {
+                id: "%",
+                name: "% Complete",
+                field: "percentComplete",
+                width: 200
+            }]
+        },
+
+        {
+            id: "Period",
+            name: 'Period',
+            columns: [{
+                id: "start",
+                name: "Start",
+                field: "start",
+                width: 200
+            }, {
+                id: "finish",
+                name: "Finish",
+                field: "finish",
+                width: 200
+            }]
+        }, {
+            id: 'effortdriven',
+            name: 'Effort-Driven',
+            columns: [{
+                    id: "effort-driven1",
+                    name: "Effort Driven 1",
+                    field: "effortDriven",
+                    width: 200
+                }, {
+                    id: "effort-driven2",
+                    name: "Effort Driven 2",
+                    field: "effortDriven",
+                    width: 200
+                }
+
+            ]
+        },
+    ];
+
+    var options = {
+        enableCellNavigation: true,
+        enableColumnReorder: false
+    };
+
+    $(function() {
+        var data = [];
+        for (var i = 0; i < 500; i++) {
+            data[i] = {
+                title: "Task " + i,
+                duration: "5 days",
+                percentComplete: Math.round(Math.random() * 100),
+                start: "01/01/2009",
+                finish: "01/05/2009",
+                effortDriven: (i % 5 == 0)
+            };
+        }
+
+        grid = new Slick.Grid("#myGrid", data, columns, options);
+    })
+    </script>
+</body>
+
+</html>
